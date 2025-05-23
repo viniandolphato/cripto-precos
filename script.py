@@ -8,11 +8,13 @@ def get_price_at_time(symbol: str, timestamp: datetime):
     params = {
         "symbol": par,
         "startTime": millis,
-        "endTime": millis + 10_000,
+        "endTime": millis + 60_000,  # 1 minuto
         "limit": 1
     }
     response = requests.get(url, params=params)
+    print(f"Requisição: {response.url}")
     data = response.json()
+    print("Resposta da API:", data)
     if isinstance(data, list) and data:
         return float(data[0]['p'])
     return None
